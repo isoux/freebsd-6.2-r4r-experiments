@@ -37,6 +37,10 @@
 #ifndef _MACHINE_SEGMENTS_H_
 #define	_MACHINE_SEGMENTS_H_
 
+#ifdef _KERNEL
+#include "opt_r4r.h"   /* R4R: experimental ring definitions, no semantic change */
+#endif
+
 /*
  * 386 Segmentation Data Structures and definitions
  *	William F. Jolitz (william@ernie.berkeley.edu) 6/20/1989
@@ -48,6 +52,17 @@
 
 #define	ISPL(s)	((s)&3)		/* what is the priority level of a selector */
 #define	SEL_KPL	0		/* kernel priority level */
+
+/*
+ * R4R: experimental ring definitions, no semantic change.
+ * These definitions do not alter existing privilege checks
+ * unless R4R is explicitly enabled.
+ */
+#ifdef R4R
+#define	SEL_R1PL	1		/* ring 1 priority level */
+#define	SEL_R2PL	2		/* ring 2 priority level */
+#endif
+
 #define	SEL_UPL	3		/* user priority level */
 #define	ISLDT(s)	((s)&SEL_LDT)	/* is it local or global */
 #define	SEL_LDT	4		/* local descriptor table */

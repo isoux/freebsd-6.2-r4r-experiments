@@ -725,3 +725,6 @@ HWPMC_HOOKS
 
 # XBOX options for FreeBSD/i386, but some files are MI
 XBOX			opt_xbox.h
+
+# R4R options for FreeBSD/i386, all files are MD
+R4R		opt_r4r.h

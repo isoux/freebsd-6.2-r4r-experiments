@@ -1,0 +1,11 @@
+#
+# R4R kernel option
+#
+# When enabled, the build system generates opt_r4r.h
+# defining the macro R4R.
+#
+# This option is experimental and currently introduces
+# no semantic changes to the kernel.
+#
+# Intended for low-level experimentation with x86 segmentation.
+#
