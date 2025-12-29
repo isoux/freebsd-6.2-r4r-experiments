@@ -1,0 +1,10 @@
+#
+# $P4: //depot/projects/trustedbsd/openbsm/etc/audit_control#5 $
+# $FreeBSD: src/contrib/openbsm/etc/audit_control,v 1.2.2.2 2006/09/29 22:41:54 rwatson Exp $
+#
+dir:/var/audit
+flags:lo
+minfree:20
+naflags:lo
+policy:cnt
+filesz:0

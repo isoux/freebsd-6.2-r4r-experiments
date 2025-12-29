@@ -1,0 +1,21 @@
+# $FreeBSD: src/gnu/usr.bin/send-pr/categories,v 1.17.2.1 2006/07/17 10:38:37 ceri Exp $
+advocacy
+alpha
+amd64
+bin
+conf
+docs
+gnu
+i386
+ia64
+java
+kern
+misc
+ports
+powerpc
+sparc64
+standards
+sun4v
+threads
+usb
+www
