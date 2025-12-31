@@ -1,6 +1,10 @@
 # FreeBSD 6.2 R4R Experiments 🛠️
 
-This repository is based on the original FreeBSD 6.2 source code, with experimental R4R (Rusted 4 Rings) additions. Please note that these experiments target the Intel x86 architecture, both 32-bit (i386) and 64-bit (amd64).
+> This repository is intended for research and educational purposes. 🔭
+
+> Here is the original FreeBSD 6.2 [README](README) ⚠️
+
+This repository is based on the original FreeBSD 6.2 source code, with experimental R4R (Rusted 4 Rings) additions layered on top. Please note that these experiments target the Intel x86 architecture, both 32-bit (i386) and 64-bit (amd64).
 
 ## What is R4R? ✨
 
@@ -8,10 +12,14 @@ R4R experiments are an attempt to utilize all CPU rings as additional helper lay
 
 ## Our Approach 🧩
 
-We are not modifying the core FreeBSD itself. Instead, we are exploring how these ideas can be gradually integrated as additional experiments on Intel processors, without altering the existing system structure. The R4R option in the code indicates that this is our experimental addition and not a fundamental FreeBSD change.
+We are not modifying the core FreeBSD itself. Instead, we are exploring how these ideas can be gradually integrated as additional experiments on Intel processors, without altering the existing system structure or semantics. The R4R option in the code indicates that this is our experimental addition and not a fundamental FreeBSD change.
 
 ## Initial Idea 💡
 
 The initial idea started [from here](https://forums.freebsd.org/threads/humble-hobby-os-project.99600/page-2#post-734141), and you can read more details and the reactions on the forum.
+
+## Change Log 📝
+
+Follow the ongoing changes in [LOG.md](LOG.md)
 
 ---
