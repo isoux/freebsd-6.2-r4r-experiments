@@ -1,6 +1,6 @@
 # FreeBSD 6.2 R4R Experiments 🛠️
 
-This repository is based on the original FreeBSD 6.2 source code, with added R4R (Rusted 4 Rings) experiments. Please note that these experiments are conducted on Intel architecture, both 32-bit (i386) and 64-bit (AMD64) processors.
+This repository is based on the original FreeBSD 6.2 source code, with experimental R4R (Rusted 4 Rings) additions. Please note that these experiments target the Intel x86 architecture, both 32-bit (i386) and 64-bit (amd64).
 
 ## What is R4R? ✨
 
