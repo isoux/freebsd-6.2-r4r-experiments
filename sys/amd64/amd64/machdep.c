@@ -186,6 +186,9 @@ static void
 cpu_startup(dummy)
 	void *dummy;
 {
+#ifdef R4R
+        printf("R4R: experimental ring framework enabled\n");
+#endif
 	/*
 	 * Good {morning,afternoon,evening,night}.
 	 */

@@ -54,6 +54,7 @@ __FBSDID("$FreeBSD: src/sys/i386/i386/machdep.c,v 1.616.2.8 2006/09/11 18:41:31 
 #include "opt_npx.h"
 #include "opt_perfmon.h"
 #include "opt_xbox.h"
+#include "opt_r4r.h"
 
 #include <sys/param.h>
 #include <sys/proc.h>
@@ -213,6 +214,9 @@ static void
 cpu_startup(dummy)
 	void *dummy;
 {
+#ifdef R4R
+        printf("R4R: experimental ring framework enabled\n");
+#endif
 	/*
 	 * Good {morning,afternoon,evening,night}.
 	 */
