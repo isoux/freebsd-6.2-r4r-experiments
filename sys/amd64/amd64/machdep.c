@@ -53,6 +53,7 @@ __FBSDID("$FreeBSD: src/sys/amd64/amd64/machdep.c,v 1.638.2.10.2.1 2006/12/23 01
 #include "opt_maxmem.h"
 #include "opt_msgbuf.h"
 #include "opt_perfmon.h"
+#include "opt_r4r.h"
 
 #include <sys/param.h>
 #include <sys/proc.h>
