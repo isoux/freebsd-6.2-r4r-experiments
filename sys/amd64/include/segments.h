@@ -219,6 +219,18 @@ struct region_descriptor {
 /* slot 6 is second half of GPROC0_SEL */
 #define	NGDT 		8
 
+#ifdef R4R
+/*
+ * R4R: GDT management range.
+ * Intel GDT limit is 8192 descriptors.
+ * Original FreeBSD descriptors occupy [0..NGDT-1].
+ * R4R manages [NGDT..8191].
+ */
+#define GDT_MAX_DESCRIPTORS  8192
+#define R4R_GDT_START        NGDT
+#define R4R_GDT_COUNT        (GDT_MAX_DESCRIPTORS - NGDT)
+#endif
+
 #ifdef _KERNEL
 extern struct user_segment_descriptor gdt[];
 extern struct soft_segment_descriptor gdt_segs[];

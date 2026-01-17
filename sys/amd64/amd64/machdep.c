@@ -683,7 +683,12 @@ SYSCTL_INT(_machdep, CPU_WALLCLOCK, wall_cmos_clock,
  * Initialize segments & interrupt table
  */
 
-struct user_segment_descriptor gdt[NGDT * MAXCPU];/* global descriptor table */
+#ifndef R4R
+struct user_segment_descriptor gdt[NGDT * MAXCPU];	/* global descriptor table */
+#else
+struct user_segment_descriptor gdt[GDT_MAX_DESCRIPTORS * MAXCPU];
+#endif
+
 static struct gate_descriptor idt0[NIDT];
 struct gate_descriptor *idt = &idt0[0];	/* interrupt descriptor table */
 
@@ -1191,7 +1196,22 @@ hammer_time(u_int64_t modulep, u_int64_t physfree)
 	ssdtosyssd(&gdt_segs[GPROC0_SEL],
 	    (struct system_segment_descriptor *)&gdt[GPROC0_SEL]);
 
+#ifdef R4R
+	/*
+	 * R4R: initialize remaining GDT entries with null descriptors.
+	 * Original FreeBSD descriptors occupy [0 .. NGDT-1].
+	 * TSS occupies GPROC0_SEL and GPROC0_SEL+1.
+	 * The rest of the GDT space up to the architectural limit
+	 * (8192 descriptors) is reserved for R4R experimentation.
+	 */
+	for (x = R4R_GDT_START; x < GDT_MAX_DESCRIPTORS; x++)
+		ssdtosd(&gdt_segs[GNULL_SEL], &gdt[x]);
+
+	r_gdt.rd_limit = GDT_MAX_DESCRIPTORS * sizeof(gdt[0]) - 1;
+#else
 	r_gdt.rd_limit = NGDT * sizeof(gdt[0]) - 1;
+#endif
+
 	r_gdt.rd_base =  (long) gdt;
 	lgdt(&r_gdt);
 	pc = &__pcpu[0];
