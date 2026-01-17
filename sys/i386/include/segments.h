@@ -239,6 +239,18 @@ struct region_descriptor {
 
 #define	NGDT 		19
 
+#ifdef R4R
+/*
+ * R4R: GDT management range.
+ * Intel GDT limit is 8192 descriptors.
+ * Original FreeBSD descriptors occupy [0..NGDT-1].
+ * R4R manages [NGDT..8191].
+ */
+#define GDT_MAX_DESCRIPTORS  8192
+#define R4R_GDT_START        NGDT
+#define R4R_GDT_COUNT        (GDT_MAX_DESCRIPTORS - NGDT)
+#endif
+
 /*
  * Entries in the Local Descriptor Table (LDT)
  */

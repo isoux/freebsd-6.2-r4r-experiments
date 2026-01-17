@@ -1294,7 +1294,13 @@ SYSCTL_ULONG(_machdep, OID_AUTO, guessed_bootdev,
  */
 
 int _default_ldt;
+
+#ifndef R4R
 union descriptor gdt[NGDT * MAXCPU];	/* global descriptor table */
+#else
+union descriptor gdt[GDT_MAX_DESCRIPTORS * MAXCPU];
+#endif
+
 static struct gate_descriptor idt0[NIDT];
 struct gate_descriptor *idt = &idt0[0];	/* interrupt descriptor table */
 union descriptor ldt[NLDT];		/* local descriptor table */
@@ -2123,9 +2129,33 @@ init386(first)
 	for (x = 0; x < NGDT; x++)
 		ssdtosd(&gdt_segs[x], &gdt[x].sd);
 
+#ifdef R4R
+	/*
+	 * R4R: initialize the remaining GDT entries with null descriptors.
+	 *
+	 * The original FreeBSD descriptors occupy [0 .. NGDT-1].
+	 * The rest of the GDT space up to the architectural limit
+	 * (8192 descriptors) is reserved for experimental R4R use and
+	 * is explicitly filled with zeroed (null) descriptors.
+	 *
+	 * After this initial zeroing, R4R-specific descriptors are
+	 * initialized by the R4R GDT management subsystem in a
+	 * separate source file.
+	 *
+	 * No semantic changes are introduced for the standard FreeBSD
+	 * segment layout.
+	 */
+	for (x = R4R_GDT_START; x < GDT_MAX_DESCRIPTORS; x++)
+		ssdtosd(&gdt_segs[GNULL_SEL], &gdt[x].sd);
+
+	r_gdt.rd_limit = GDT_MAX_DESCRIPTORS * sizeof(gdt[0]) - 1;
+#else
 	r_gdt.rd_limit = NGDT * sizeof(gdt[0]) - 1;
+#endif
+
 	r_gdt.rd_base =  (int) gdt;
 	lgdt(&r_gdt);
+
 
 	pcpu_init(pc, 0, sizeof(struct pcpu));
 	PCPU_SET(prvspace, pc);
