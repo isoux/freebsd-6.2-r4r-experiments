@@ -13,6 +13,5 @@
 ## 2026-01-17
 
 - 📌 Description:  
-Extended the i386 GDT layout under the R4R kernel option to reserve the full architectural GDT range (8192 descriptors). The original FreeBSD descriptors remain unchanged in the range [0..NGDT-1]. All remaining entries are explicitly initialized as null descriptors during early boot. R4R-specific descriptor initialization is deferred to a dedicated GDT management subsystem in a separate source file. No semantic changes are introduced to the standard FreeBSD segment layout.
-
-- 🔗 Commit [link:](https://github.com/isoux/freebsd-6.2-r4r-experiments/commit/5c6802a41a98f080aea84e04f110812bc6e5aad6)
+Extended the i386 and amd64 GDT layouts under the R4R kernel option to reserve the full architectural GDT range (8192 descriptors). The original FreeBSD descriptors remain unchanged in the range [0..NGDT-1]. All remaining entries are explicitly initialized as null descriptors during early boot. R4R-specific descriptor initialization is deferred to a dedicated GDT management subsystem in a separate source file. No semantic changes are introduced to the standard FreeBSD segment layout.
+- 🔗 Commit links: [commit 1](https://github.com/isoux/freebsd-6.2-r4r-experiments/commit/5c6802a41a98f080aea84e04f110812bc6e5aad6), [commit 2](https://github.com/isoux/freebsd-6.2-r4r-experiments/commit/333bedbc0ee6a134351753d9a1834d5464315835)
