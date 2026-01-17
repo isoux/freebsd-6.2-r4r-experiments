@@ -9,3 +9,10 @@
 
 - 📌 Description: Emit a boot-time message when R4R support is compiled in.
 - 🔗 Commit links: [commit 1](https://github.com/isoux/freebsd-6.2-r4r-experiments/commit/6cfc7304e988bc75659ad2d71066d7c08164102c), [commit 2](https://github.com/isoux/freebsd-6.2-r4r-experiments/commit/0c77eb9e04944fb0b177a9063489526e524efafb)
+
+## 2026-01-17
+
+- 📌 Description:  
+Extended the i386 GDT layout under the R4R kernel option to reserve the full architectural GDT range (8192 descriptors). The original FreeBSD descriptors remain unchanged in the range [0..NGDT-1]. All remaining entries are explicitly initialized as null descriptors during early boot. R4R-specific descriptor initialization is deferred to a dedicated GDT management subsystem in a separate source file. No semantic changes are introduced to the standard FreeBSD segment layout.
+
+- 🔗 Commit [link:](https://github.com/isoux/freebsd-6.2-r4r-experiments/commit/5c6802a41a98f080aea84e04f110812bc6e5aad6)
