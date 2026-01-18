@@ -22,10 +22,13 @@
 __FBSDID("$R4R: r4r_gdt.c MIT licensed experimental GDT manager $");
 
 #include <sys/param.h>
+#include <sys/systm.h>
+
 #include <machine/cpu.h>
+#include <machine/cpufunc.h>
 #include <machine/smp.h>
 
-#include "r4r_gdt.h"
+#include <i386/r4r/r4r_gdt.h>
 
 struct r4r_gdt_cpu {
 	uint8_t bitmap[R4R_GDT_COUNT / 8];
