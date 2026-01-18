@@ -28,3 +28,11 @@ A dedicated R4R kernel configuration file was introduced to support clean kernel
 No functional behavior of the GDT manager was changed; this commit strictly focuses on build system correctness, directory structure consistency, and integration hygiene.
 
 - 🔗 Commit links: [commit 1](https://github.com/isoux/freebsd-6.2-r4r-experiments/commit/328e6e365a22bc7aed80b19df47cf98215d794e7), [commit 2](https://github.com/isoux/freebsd-6.2-r4r-experiments/commit/cda189ff742e7d2da8410360561a1b7cffb8291c)
+
+- 🖼️ Build and boot verification:
+
+![](assets/2026-01-18/make-r4r.png)
+
+![](assets/2026-01-18/install-r4r.png)
+
+![](assets/2026-01-18/boot-r4r.png)
