@@ -36,3 +36,10 @@ No functional behavior of the GDT manager was changed; this commit strictly focu
 ![](assets/2026-01-18/install-r4r.png)
 
 ![](assets/2026-01-18/boot-r4r.png)
+
+## 2026-01-19
+
+- 📌 Description:  
+Introduced a dedicated fast kernel build script for the R4R kernel configuration. The script performs a clean kernel-only build without modules, installs the kernel, and restores only the `acpi.ko` module from the object tree. This ensures deterministic kernel rebuilds while keeping ACPI functionality available for VirtualBox and real hardware environments.  
+The script is location-independent and safely returns to the original working directory after execution. 
+- 🔗 Commit links: [r4r_fast_build.sh](https://github.com/isoux/freebsd-6.2-r4r-experiments/commit/e72d71d6446865f74807bd56045358697921ebd5)
