@@ -43,3 +43,17 @@ No functional behavior of the GDT manager was changed; this commit strictly focu
 Introduced a dedicated fast kernel build script for the R4R kernel configuration. The script performs a clean kernel-only build without modules, installs the kernel, and restores only the `acpi.ko` module from the object tree. This ensures deterministic kernel rebuilds while keeping ACPI functionality available for VirtualBox and real hardware environments.  
 The script is location-independent and safely returns to the original working directory after execution. 
 - 🔗 Commit links: [r4r_fast_build.sh](https://github.com/isoux/freebsd-6.2-r4r-experiments/commit/e72d71d6446865f74807bd56045358697921ebd5)
+
+## 2026-01-22
+
+- 📌 Description:  
+Established the initial architectural direction and design decisions for the R4R GDT management subsystem. The standard FreeBSD GDT layout remains untouched, while the remaining architectural GDT space is now cleanly reserved and prepared for controlled management by the R4R framework. This commit introduces the foundational structure: bitmap-based descriptor tracking, per-CPU accounting, and a clear separation between standard FreeBSD GDT entries and R4R-managed descriptors.
+During this phase, the code was repeatedly refined to better align with FreeBSD kernel style, naming conventions, layout, and documentation practices.  
+Although still at an early stage, the subsystem now reflects a clear and consistent design direction rather than a collection of experimental fragments.
+Initial R4R code and data descriptors for rings 0–3 are now created and installed through the R4R GDT layer, forming a stable base for the upcoming TSS and call gate descriptor work.
+This entry marks the point where the R4R project defines its long-term technical path and internal structure.
+
+- 🔗 Commit link: [commit 1](https://github.com/isoux/freebsd-6.2-r4r-experiments/commit/60320db72eacacd4dfb8bc9783d5577481d40de8)
+- 🖼️ Boot verification:  
+
+![](assets/2026-01-22/boot-r4r.png)
