@@ -142,6 +142,10 @@ int arch_i386_is_xbox = 0;
 uint32_t arch_i386_xbox_memsize = 0;
 #endif
 
+#ifdef R4R
+#include <i386/r4r/r4r_gdt.h>
+#endif
+
 /* Sanity check for __curthread() */
 CTASSERT(offsetof(struct pcpu, pc_curthread) == 0);
 
@@ -215,7 +219,7 @@ cpu_startup(dummy)
 	void *dummy;
 {
 #ifdef R4R
-        printf("R4R: experimental ring framework enabled\n");
+	r4r_print_status();
 #endif
 	/*
 	 * Good {morning,afternoon,evening,night}.
@@ -2130,24 +2134,7 @@ init386(first)
 		ssdtosd(&gdt_segs[x], &gdt[x].sd);
 
 #ifdef R4R
-	/*
-	 * R4R: initialize the remaining GDT entries with null descriptors.
-	 *
-	 * The original FreeBSD descriptors occupy [0 .. NGDT-1].
-	 * The rest of the GDT space up to the architectural limit
-	 * (8192 descriptors) is reserved for experimental R4R use and
-	 * is explicitly filled with zeroed (null) descriptors.
-	 *
-	 * After this initial zeroing, R4R-specific descriptors are
-	 * initialized by the R4R GDT management subsystem in a
-	 * separate source file.
-	 *
-	 * No semantic changes are introduced for the standard FreeBSD
-	 * segment layout.
-	 */
-	for (x = R4R_GDT_START; x < GDT_MAX_DESCRIPTORS; x++)
-		ssdtosd(&gdt_segs[GNULL_SEL], &gdt[x].sd);
-
+	r4r_gdt_cpu_init(gdt);
 	r_gdt.rd_limit = GDT_MAX_DESCRIPTORS * sizeof(gdt[0]) - 1;
 #else
 	r_gdt.rd_limit = NGDT * sizeof(gdt[0]) - 1;
